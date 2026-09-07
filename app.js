@@ -91,6 +91,7 @@ function render() {
   }
   for (const [i, a] of result.activations.entries()) {
     const item = document.createElement('li'); item.className = 'route-item';
+    item.style.setProperty('--order', Math.min(i, 8));
     const badge = document.createElement('span'); badge.className = 'route-num'; badge.textContent = `${i + 1}`;
     const time = document.createElement('div'), strong = document.createElement('strong'), small = document.createElement('small');
     time.className = 'route-time'; strong.textContent = clock(a.time); small.textContent = `Compasso ${a.measure} · até ${clock(a.endTime)}`; time.append(strong, small);
@@ -110,23 +111,23 @@ function render() {
 function plot(ctx, width, height, offset = 0) {
   const left = 32, right = width - 14, top = offset + 35, bottom = offset + height - 35;
   const x = t => left + t / Math.max(1, result.duration) * (right - left);
-  ctx.fillStyle = '#131610'; ctx.fillRect(0, offset, width, height);
+  ctx.fillStyle = '#0d1120'; ctx.fillRect(0, offset, width, height);
   for (const [i, a] of result.activations.entries()) {
-    ctx.fillStyle = '#e2c17a26'; ctx.fillRect(x(a.time), top - 20, Math.max(2, x(a.endTime) - x(a.time)), bottom - top + 32);
-    ctx.fillStyle = '#e2c17a'; ctx.font = 'bold 11px Segoe UI, sans-serif'; ctx.fillText(`${i + 1}`, x(a.time) + 3, top - 7);
+    ctx.fillStyle = '#b6a2ff26'; ctx.fillRect(x(a.time), top - 20, Math.max(2, x(a.endTime) - x(a.time)), bottom - top + 32);
+    ctx.fillStyle = '#b6a2ff'; ctx.font = 'bold 11px Segoe UI, sans-serif'; ctx.fillText(`${i + 1}`, x(a.time) + 3, top - 7);
   }
   for (let lane = 0; lane < 6; lane++) {
     const y = top + lane * (bottom - top) / 5;
-    ctx.strokeStyle = '#303429'; ctx.beginPath(); ctx.moveTo(left, y); ctx.lineTo(right, y); ctx.stroke();
-    ctx.fillStyle = '#939b87'; ctx.font = '10px Segoe UI, sans-serif'; ctx.fillText(['V','R','A','Z','L','O'][lane], 9, y + 4);
+    ctx.strokeStyle = '#2c3553'; ctx.beginPath(); ctx.moveTo(left, y); ctx.lineTo(right, y); ctx.stroke();
+    ctx.fillStyle = '#9aa6c8'; ctx.font = '10px Segoe UI, sans-serif'; ctx.fillText(['V','R','A','Z','L','O'][lane], 9, y + 4);
   }
   for (const note of result.notes) for (const [i, lane] of note.lanes.entries()) {
     const y = top + lane * (bottom - top) / 5;
-    ctx.fillStyle = note.sp ? '#7bd6b4' : ['#71bb82','#e7837b','#dcca7c','#82a5d8','#d49c72','#b3a5d5'][lane];
+    ctx.fillStyle = note.sp ? '#63dff5' : ['#71bb82','#e7837b','#dcca7c','#82a5d8','#d49c72','#b3a5d5'][lane];
     ctx.globalAlpha = .55; ctx.fillRect(x(note.time), y - 1, Math.max(0, x(note.ends[i]) - x(note.time)), 2);
     ctx.globalAlpha = 1; ctx.fillRect(x(note.time) - 1.5, y - 3, 3, 6);
   }
-  ctx.fillStyle = '#939b87'; ctx.font = '10px Segoe UI, sans-serif';
+  ctx.fillStyle = '#9aa6c8'; ctx.font = '10px Segoe UI, sans-serif';
   for (let i = 0; i <= 4; i++) { ctx.textAlign = i === 4 ? 'right' : 'left'; ctx.fillText(clock(result.duration * i / 4), x(result.duration * i / 4), offset + height - 10); }
   ctx.textAlign = 'left';
 }
@@ -141,19 +142,19 @@ async function exportImage() {
   const snapshot = result;
   const canvas = document.createElement('canvas'); canvas.width = 1200; canvas.height = 455 + Math.max(1, result.activations.length) * 62;
   if (canvas.height > 16000) { status('Rota extensa demais para PNG. Consulte a lista na página.', true); return; }
-  const ctx = canvas.getContext('2d'); ctx.fillStyle = '#11130f'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#e2c17a'; ctx.font = 'bold 18px Segoe UI, sans-serif'; ctx.fillText('BACKSTAGE / STARPOWER LAB', 32, 42);
-  ctx.fillStyle = '#f1f0e7'; ctx.font = 'bold 30px Segoe UI, sans-serif'; ctx.fillText(metadata.title, 32, 87, 1120);
+  const ctx = canvas.getContext('2d'); ctx.fillStyle = '#090b14'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#b6a2ff'; ctx.font = 'bold 18px Segoe UI, sans-serif'; ctx.fillText('BACKSTAGE / STARPOWER LAB', 32, 42);
+  ctx.fillStyle = '#f3f5ff'; ctx.font = 'bold 30px Segoe UI, sans-serif'; ctx.fillText(metadata.title, 32, 87, 1120);
   ctx.font = '16px Segoe UI, sans-serif'; ctx.fillText(`${$('song-subtitle').textContent} · ${number(result.estimated)} pontos estimados · ${result.mode === 'max' ? 'Whammy máximo' : 'Conservadora'}${result.whammyEnabled ? '' : ' (whammy OFF)'}`, 32, 117, 1120);
   plot(ctx, 1200, 230, 140);
   result.activations.forEach((a, i) => {
     const y = 405 + i * 62;
-    ctx.fillStyle = '#e2c17a'; ctx.font = 'bold 20px Segoe UI, sans-serif'; ctx.fillText(`${i + 1}.  ${clock(a.time)}`, 32, y);
-    ctx.fillStyle = '#f1f0e7'; ctx.font = '16px Segoe UI, sans-serif'; ctx.fillText(cue(a), 220, y, 690);
+    ctx.fillStyle = '#b6a2ff'; ctx.font = 'bold 20px Segoe UI, sans-serif'; ctx.fillText(`${i + 1}.  ${clock(a.time)}`, 32, y);
+    ctx.fillStyle = '#f3f5ff'; ctx.font = '16px Segoe UI, sans-serif'; ctx.fillText(cue(a), 220, y, 690);
     ctx.fillText(`${Math.round(a.energy * 100)}% de barra`, 1000, y);
-    ctx.fillStyle = '#a4aa9b'; ctx.font = '13px Segoe UI, sans-serif'; ctx.fillText(`Compasso ${a.measure} · até ${clock(a.endTime)} · +${number(a.bonus)} pontos estimados`, 220, y + 22);
+    ctx.fillStyle = '#a9b2d1'; ctx.font = '13px Segoe UI, sans-serif'; ctx.fillText(`Compasso ${a.measure} · até ${clock(a.endTime)} · +${number(a.bonus)} pontos estimados`, 220, y + 22);
   });
-  ctx.fillStyle = '#a4aa9b'; ctx.font = '13px Segoe UI, sans-serif';
+  ctx.fillStyle = '#a9b2d1'; ctx.font = '13px Segoe UI, sans-serif';
   ctx.fillText('Rota aproximada, não máximo teórico. Horários relativos ao chart. iag0d.github.io/backstage-starpower', 32, canvas.height - 22);
   canvas.toBlob(blob => {
     if (!blob || snapshot !== result) return;
@@ -192,3 +193,20 @@ $('dropzone').addEventListener('drop', e => { if (e.dataTransfer.files[0]) load(
 window.addEventListener('dragover', e => e.preventDefault());
 window.addEventListener('drop', e => e.preventDefault());
 new ResizeObserver(draw).observe($('chart'));
+
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+function pauseMotion(paused) {
+  paused = paused || motionPreference.matches;
+  document.documentElement.classList.toggle('motion-paused', paused);
+  $('motion-toggle').disabled = motionPreference.matches;
+  $('motion-toggle').setAttribute('aria-pressed', String(paused));
+  $('motion-toggle').setAttribute('aria-label', paused ? 'Ativar animações' : 'Pausar animações');
+  $('motion-toggle').textContent = paused ? '▷ Animar' : 'Ⅱ Pausar';
+  if (motionPreference.matches) {
+    $('motion-toggle').textContent = 'Sem movimento';
+    $('motion-toggle').setAttribute('aria-label', 'Animações desativadas pela preferência de movimento reduzido do sistema');
+  }
+}
+pauseMotion(motionPreference.matches);
+motionPreference.addEventListener('change', event => pauseMotion(event.matches));
+$('motion-toggle').onclick = () => pauseMotion(!document.documentElement.classList.contains('motion-paused'));

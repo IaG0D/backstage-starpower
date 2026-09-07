@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420">
-<rect width="1280" height="420" rx="20" fill="#11130f"/>
-<path d="M60 350H1220M60 68H1220" stroke="#343e2c"/>
+<rect width="1280" height="420" rx="20" fill="#090b14"/>
+<path d="M60 350H1220M60 68H1220" stroke="#313958"/>
 <g font-family="Segoe UI,Arial,sans-serif">
-<text x="62" y="46" fill="#e2c17a" font-size="15" letter-spacing="4">BACKSTAGE / STARPOWER LAB</text>
-<text x="62" y="157" fill="#f1f0e7" font-size="57" font-weight="600" letter-spacing="-2">Cada nota conta.</text>
-<text x="62" y="226" fill="#e2c17a" font-size="57" font-weight="600" letter-spacing="-2">Seu especial também.</text>
-<text x="64" y="288" fill="#a2a697" font-size="18">Seu chart. Sua rota. Processado no seu navegador.</text>
-<text x="64" y="389" fill="#a2a697" font-size="13" letter-spacing="2">.MID + .MIDI + .CHART</text>
-<text x="965" y="389" fill="#a2a697" font-size="13">iag0d.github.io/backstage-starpower</text>
+<text x="62" y="46" fill="#b6a2ff" font-size="15" letter-spacing="4">BACKSTAGE / STARPOWER LAB</text>
+<text x="62" y="157" fill="#f3f5ff" font-size="57" font-weight="600" letter-spacing="-2">Cada nota conta.</text>
+<text x="62" y="226" fill="#b6a2ff" font-size="57" font-weight="600" letter-spacing="-2">Seu especial também.</text>
+<text x="64" y="288" fill="#afb5ce" font-size="18">Seu chart. Sua rota. Processado no seu navegador.</text>
+<text x="64" y="389" fill="#afb5ce" font-size="13" letter-spacing="2">.MID + .MIDI + .CHART</text>
+<text x="965" y="389" fill="#afb5ce" font-size="13">iag0d.github.io/backstage-starpower</text>
 </g>
-<g transform="translate(860 105)"><rect width="330" height="205" rx="12" fill="#1d241a" stroke="#475536"/><path d="M30 40H300M30 70H300M30 100H300M30 130H300M30 160H300" stroke="#495440"/><rect x="147" y="22" width="115" height="158" fill="#e2c17a" opacity=".14"/><path d="M147 22V180M262 22V180" stroke="#e2c17a" opacity=".5"/><g fill="#7bd6b4"><circle cx="55" cy="40" r="6"/><circle cx="72" cy="70" r="6"/><circle cx="90" cy="130" r="6"/><circle cx="115" cy="100" r="6"/></g><g fill="#e2c17a"><circle cx="163" cy="70" r="6"/><circle cx="180" cy="40" r="6"/><circle cx="197" cy="100" r="6"/><circle cx="214" cy="130" r="6"/><circle cx="231" cy="70" r="6"/><circle cx="248" cy="160" r="6"/></g></g>
+<g transform="translate(860 105)"><rect width="330" height="205" rx="12" fill="#181d32" stroke="#47416d"/><path d="M30 40H300M30 70H300M30 100H300M30 130H300M30 160H300" stroke="#424b6b"/><rect x="147" y="22" width="115" height="158" fill="#b6a2ff" opacity=".14"/><path d="M147 22V180M262 22V180" stroke="#b6a2ff" opacity=".5"/><g fill="#63dff5"><circle cx="55" cy="40" r="6"/><circle cx="72" cy="70" r="6"/><circle cx="90" cy="130" r="6"/><circle cx="115" cy="100" r="6"/></g><g fill="#b6a2ff"><circle cx="163" cy="70" r="6"/><circle cx="180" cy="40" r="6"/><circle cx="197" cy="100" r="6"/><circle cx="214" cy="130" r="6"/><circle cx="231" cy="70" r="6"/><circle cx="248" cy="160" r="6"/></g></g>
 </svg>

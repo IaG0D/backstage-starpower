@@ -39,6 +39,7 @@ As duas estratégias comparam guardar e ativar ao longo do chart. “Conservador
 - Frases de especial: evento `S 2` no CHART, pitch 116 no MIDI; fallback legado para 103 com aviso.
 - Enhanced Opens e regiões open de SysEx Phase Shift.
 - Layout adaptável, processamento em Web Worker e exportação de PNG.
+- Visual roxo/azul neon, pista animada e transições leves, sem bibliotecas adicionais. O botão **Pausar** interrompe os efeitos; a preferência de movimento reduzido do sistema é respeitada automaticamente.
 
 **Não suportado:** bateria, pro instruments, seis frets, áudio, playlists, ZIP/SNG e song.ini. Use o arquivo de notas já extraído. O demo “Neon Run” é sintético e original deste projeto, sem música comercial.
 

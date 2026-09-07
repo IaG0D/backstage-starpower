@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { runInNewContext } from 'node:vm';
 import { parseFile, parseChart, timeMap } from '../lib/parser.js';
 import { analyze, buildTimeline, solve } from '../lib/optimizer.js';
 
@@ -105,4 +106,29 @@ test('every interface binding and local HTML resource exists', async () => {
   for (const [, id] of app.matchAll(/\$\('([^']+)'\)/g)) assert.ok(ids.includes(id), `missing element ${id}`);
   for (const [, path] of html.matchAll(/(?:src|href)="(\.\/[^"#]+)"/g)) if (path !== './') assert.ok((await readFile(new URL(path, root))).length > 0, path);
   assert.ok(!/https?:\/\//.test(app), 'no external app requests');
+});
+
+test('motion control pauses, resumes and honors a reduced-motion preference', async () => {
+  const app = await readFile(new URL('../app.js', import.meta.url), 'utf8');
+  const start = app.indexOf('const motionPreference =');
+  assert.ok(start >= 0);
+  const attributes = {}, classes = new Set();
+  const button = { setAttribute: (key, value) => { attributes[key] = value; } };
+  const preference = { matches: false, addEventListener: (_event, handler) => { preference.change = handler; } };
+  runInNewContext(app.slice(start), {
+    $: () => button, window: { matchMedia: () => preference },
+    document: { documentElement: { classList: {
+      toggle: (name, enabled) => enabled ? classes.add(name) : classes.delete(name),
+      contains: name => classes.has(name)
+    } } }
+  });
+  assert.equal(attributes['aria-pressed'], 'false');
+  button.onclick(); assert.ok(classes.has('motion-paused'));
+  assert.equal(attributes['aria-label'], 'Ativar animações');
+  button.onclick(); assert.equal(classes.size, 0);
+  preference.matches = true; preference.change({matches:true});
+  assert.equal(button.disabled, true); assert.ok(classes.has('motion-paused'));
+  button.onclick(); assert.ok(classes.has('motion-paused'), 'system preference cannot be bypassed');
+  preference.matches = false; preference.change({matches:false});
+  assert.equal(button.disabled, false); assert.equal(classes.size, 0);
 });

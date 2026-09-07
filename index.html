@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Backstage StarPower — cada nota conta</title>
   <meta name="description" content="Importe seu chart, visualize as ativações e planeje seu Star Power no Clone Hero. Gratuito, aberto e processado no navegador.">
-  <meta name="theme-color" content="#11130f">
+  <meta name="theme-color" content="#090b14">
   <meta property="og:title" content="Backstage StarPower — cada nota conta">
   <meta property="og:description" content="Seu chart. Sua rota. Mais intenção em cada ativação de Star Power.">
   <meta property="og:type" content="website">
@@ -27,7 +27,7 @@
         <div class="trust"><span>◈ Sem instalação</span><span>◈ Arquivo fica com você</span><span>◈ Código aberto</span></div>
       </div>
       <div class="hero-art" aria-label="Ilustração de uma pista de cinco frets com uma janela de especial">
-        <div class="art-head"><span>THE SWEET SPOT</span><span class="mono">SP / 08</span></div>
+        <div class="art-head"><span>THE SWEET SPOT</span><button id="motion-toggle" class="motion-toggle" aria-pressed="false" aria-label="Pausar animações">Ⅱ Pausar</button></div>
         <div class="art-glow"></div><div class="highway"><div class="lane l0"></div><div class="lane l1"></div><div class="lane l2"></div><div class="lane l3"></div><div class="lane l4"></div><div class="activation-zone"></div><div class="rail-line r1"></div><div class="rail-line r2"></div><div class="rail-line r3"></div><div class="rail-line r4"></div><div class="gem g1"></div><div class="gem g2"></div><div class="gem g3"></div><div class="gem g4"></div><div class="gem g5"></div><div class="gem g6"></div><div class="gem g7"></div><div class="hit-line"></div><div class="frets"><i></i><i></i><i></i><i></i><i></i></div></div>
         <div class="art-callout"><span class="spark">ϟ</span><span><strong>A hora de ativar.</strong><small>Mais notas sob o mesmo especial.</small></span><span class="callout-arrow">↗</span></div>
         <div class="art-foot"><span>GUARDE. ATIVE. MULTIPLIQUE.</span><span>01 — 05</span></div>
@@ -53,7 +53,7 @@
           <div id="status" class="status" role="status" aria-live="polite">Importe seu chart ou explore a demonstração.</div>
           <div id="output" hidden>
             <div class="metrics"><div><span>PONTUAÇÃO ESTIMADA</span><strong id="score">—</strong><small id="score-gain">—</small></div><div><span>ATIVAÇÕES</span><strong id="activation-count">—</strong><small id="phrase-count">—</small></div><div><span>NOTAS / DURAÇÃO</span><strong id="note-count">—</strong><small id="duration">—</small></div></div>
-            <div class="chart-toolbar"><div><h4>Mapa de ativações</h4><span class="chart-legend"><i class="legend-gold"></i> Especial ativo <i class="legend-teal"></i> Frase de especial</span></div><button id="export" class="button subtle" title="Exportar imagem da rota">Baixar PNG <span aria-hidden="true">↓</span></button></div>
+            <div class="chart-toolbar"><div><h4>Mapa de ativações</h4><span class="chart-legend"><i class="legend-accent"></i> Especial ativo <i class="legend-sp"></i> Frase de especial</span></div><button id="export" class="button subtle" title="Exportar imagem da rota">Baixar PNG <span aria-hidden="true">↓</span></button></div>
             <div class="chart-scroll"><canvas id="chart" width="1000" height="270" role="img" aria-label="Mapa do chart e janelas de especial. Os mesmos dados estão na lista de ativações abaixo."></canvas></div>
             <div class="route-heading"><h4>Sua rota, passo a passo</h4><span>HORÁRIOS DO CHART</span></div>
             <ol id="route" class="route-list"></ol>
